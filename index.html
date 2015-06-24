@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="bundle.js"></script>
+</head>
+<body>
+
+<script>
+var req = http.request('/bundle.js')
+req.on('response', function (res) {
+	res.on('data', function (buf) {
+		console.warn('len:', buf.length)
+		console.log('chunk:', buf.toString())
+	})
+	res.on('end', function () {
+		console.log('done!')
+	})
+})
+req.end()
+</script>
+
+
+</body>
+</html>

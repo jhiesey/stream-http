@@ -1,0 +1,15 @@
+{
+  "name": "httpstream",
+  "version": "1.0.0",
+  "description": "Streaming http in the browser",
+  "main": "index.js",
+  "scripts": {
+    "build": "browserify index.js -s http > bundle.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "John Hiesey",
+  "license": "MIT",
+  "dependencies": {
+    "browserify": "^10.2.4"
+  }
+}

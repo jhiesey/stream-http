@@ -43,3 +43,4 @@ http.get('//bundle.js', function (res) {
 })
 ```
 
+# License: MIT

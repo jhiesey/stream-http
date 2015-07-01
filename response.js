@@ -9,7 +9,7 @@ var rStates = exports.readyStates = {
 	DONE: 4
 }
 
-var IncomingMessage = exports.IncomingMessage = function (xhr, fetchResponse, mode) {
+var IncomingMessage = exports.IncomingMessage = function (xhr, response, mode) {
 	var self = this
 	stream.Readable.call(self)
 
@@ -20,34 +20,38 @@ var IncomingMessage = exports.IncomingMessage = function (xhr, fetchResponse, mo
 	self.rawTrailers = []
 
 	if (mode === 'fetch') {
-		self._fetchResponse = fetchResponse
+		self._fetchResponse = response
 
 		self.statusCode = response.status
 		self.statusMessage = response.statusText
 		// backwards compatible version of for (<item> of <iterable>):
 		// for (var <item>,_i,_it = <iterable>[Symbol.iterator](); <item> = (_i = _it.next()).value,!_i.done;)
-		for (var header,_i,_it = response.headers[Symbol.iterator](); header = (_i = _it.next()).value,!_i.done;) {
+		for (var header, _i, _it = response.headers[Symbol.iterator](); header = (_i = _it.next()).value, !_i.done;) {
 			self.headers[header[0].toLowerCase()] = header[1]
-			self.rawHeeaders.push(header)
+			self.rawHeaders.push(header)
 		}
 
 		// TODO: this doesn't respect backpressure. Once WritableStream is available, this can be fixed
 		var reader = response.body.getReader()
-		reader.read().then(function (result) {
-			if (result.done) {
-				self.push(null)
-				self.emit('close')
-				return
-			}
-			self.push(new Buffer(result.value))
-		})
+		function read () {
+			reader.read().then(function (result) {
+				if (result.done) {
+					self.push(null)
+					self.emit('close')
+					return
+				}
+				self.push(new Buffer(result.value))
+				read()
+			})
+		}
+		read()
 
 	} else {
 		self._xhr = xhr
 		self._pos = 0
 
 		self.statusCode = xhr.status
-		self.statusMessage = xhr.statusText.match('/^[0-9]{3} (.*)$')[1]
+		self.statusMessage = xhr.statusText
 		var headers = xhr.getAllResponseHeaders().split(/\r?\n/)
 		headers.forEach(function (header) {
 			var matches = header.match(/^([^:]+):\s*(.*)/)
@@ -104,10 +108,9 @@ IncomingMessage.prototype._onXHRReadyStateChange = function () {
 			self.push(new Buffer(xhr.response))
 			break
 		case 'ms-stream':
-			// 
 			if (xhr.readyState !== rStates.LOADING)
 				break
-			var reader = new MSStreamReader()
+			var reader = new window.MSStreamReader()
 			reader.onprogress = function () {
 				if (reader.result.byteLength > self._pos) {
 					self.push(new Buffer(new Uint8Array(reader.result.slice(self._pos))))

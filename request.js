@@ -55,12 +55,12 @@ ClientRequest.prototype._onFinish = function () {
 	var self = this
 
 	var opts = self._opts
-	var url = opts.protocol + '//' + opts.hostname
-		+ (opts.port ? ':' + opts.port : '') + opts.path
+	var url = opts.protocol + '//' + opts.hostname +
+		(opts.port ? ':' + opts.port : '') + opts.path
 
 	var user, pass
 	if (opts.auth) {
-		var authMatch = opts.auth.match(/^([^:]*):(.*)$)/)
+		var authMatch = opts.auth.match(/^([^:]*):(.*)$/)
 		user = authMatch[0]
 		pass = authMatch[1]
 	}
@@ -68,15 +68,17 @@ ClientRequest.prototype._onFinish = function () {
 	// process and send data
 	var fullHeaders = self._fullHeaders
 	var body
-	if (typeof Blob === 'function') {
-		body = new Blob(self._body.map(function (buffer) {
-			return buffer.toArrayBuffer()
-		}), {
-			type: fullHeaders['content-type'] || ''
-		});		
-	} else {
-		// get utf8 string
-		body = Buffer.concat(self._body).toString()
+	if (opts.method in ['PUT', 'POST']) {
+		if (typeof window.Blob === 'function') {
+			body = new window.Blob(self._body.map(function (buffer) {
+				return buffer.toArrayBuffer()
+			}), {
+				type: fullHeaders['content-type'] || ''
+			})
+		} else {
+			// get utf8 string
+			body = Buffer.concat(self._body).toString()
+		}
 	}
 
 	if (self._mode === 'fetch') {
@@ -84,7 +86,7 @@ ClientRequest.prototype._onFinish = function () {
 			return [name, fullHeaders[name]]
 		})
 
-		fetch(url, {
+		window.fetch(url, {
 			method: self._opts.method,
 			headers: headers,
 			body: body,
@@ -95,7 +97,7 @@ ClientRequest.prototype._onFinish = function () {
 			self._connect()
 		})
 	} else {
-		var xhr = self._xhr = new XMLHttpRequest() // TODO: old IE
+		var xhr = self._xhr = new window.XMLHttpRequest() // TODO: old IE
 		xhr.open(self._opts.method, url, true, user, pass)
 
 		// Can't set responseType on really old browsers

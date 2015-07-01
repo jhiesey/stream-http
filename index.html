@@ -4,19 +4,36 @@
 <script src="bundle.js"></script>
 </head>
 <body>
+<div id="result"></div>
 
 <script>
-var req = http.request('/bundle.js')
-req.on('response', function (res) {
+// var req = http.request('/bundle.js')
+// req.on('response', function (res) {
+// 	res.on('data', function (buf) {
+// 		console.log('chunk:', buf.toString())
+// 	})
+// 	res.on('end', function () {
+// 		console.log('done!')
+// 	})
+// })
+// req.end()
+
+// var http = require('httpstream')
+
+http.get('//bundle.js', function (res) {
+	var div = document.getElementById('result');
+	div.innerHTML += 'GET /beep<br>';
+	
 	res.on('data', function (buf) {
-		console.warn('len:', buf.length)
-		console.log('chunk:', buf.toString())
-	})
+		div.innerHTML += buf;
+	});
+	
 	res.on('end', function () {
-		console.log('done!')
-	})
+		div.innerHTML += '<br>__END__';
+	});
 })
-req.end()
+
+
 </script>
 
 

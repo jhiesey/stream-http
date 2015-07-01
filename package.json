@@ -5,11 +5,12 @@
   "main": "index.js",
   "scripts": {
     "build": "browserify index.js -s http > bundle.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "zuul -- test/*.js"
   },
   "author": "John Hiesey",
   "license": "MIT",
   "dependencies": {
-    "browserify": "^10.2.4"
+    "browserify": "^10.2.4",
+    "zuul": "^3.1.0"
   }
 }

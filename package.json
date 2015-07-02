@@ -10,7 +10,7 @@
   "scripts": {
     "build": "browserify index.js -s http > bundle.js",
     "test": "zuul -- test/tests/*.js",
-    "test-local": "zuul --local 8080 --no-coverage -- test/tests/*/js"
+    "test-local": "zuul --local 8080 --no-coverage -- test/tests/*.js"
   },
   "author": "John Hiesey",
   "license": "MIT",

@@ -1,4 +1,4 @@
-var ClientRequest = require('./request')
+var ClientRequest = require('./lib/request')
 var url = require('url')
 
 var http = exports

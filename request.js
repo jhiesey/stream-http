@@ -125,6 +125,13 @@ ClientRequest.prototype._onFinish = function () {
 					break
 			}
 		}
+		// Necessary for streaming in Firefox, since xhr.response is ONLY defined
+		// in onprogress, not in onreadystatechange with xhr.readyState = 3
+		if (self._mode === 'moz-chunked-arraybuffer') {
+			xhr.onprogress = function () {
+				self._response._onXHRReadyStateChange()
+			}
+		}
 
 		xhr.send(body)
 		// This is the best approximation to where 'socket' should be fired

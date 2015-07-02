@@ -103,9 +103,9 @@ IncomingMessage.prototype._onXHRReadyStateChange = function () {
 			}
 			break
 		case 'moz-chunked-arraybuffer': // take whole
-			if (xhr.readyState !== rStates.LOADING)
+			if (xhr.readyState !== rStates.LOADING || !xhr.response)
 				break
-			self.push(new Buffer(xhr.response))
+			self.push(new Buffer(new Uint8Array(xhr.response)))
 			break
 		case 'ms-stream':
 			if (xhr.readyState !== rStates.LOADING)

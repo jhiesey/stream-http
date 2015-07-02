@@ -2,7 +2,10 @@ var util = require('util')
 
 exports.fetch = util.isFunction(window.fetch)
 
-function checkTypeSupport (xhr, type) {
+var xhr = new window.XMLHttpRequest()
+xhr.open('GET', '/')
+
+function checkTypeSupport (type) {
 	try {
 		xhr.responseType = type
 		return xhr.responseType === type
@@ -10,12 +13,11 @@ function checkTypeSupport (xhr, type) {
 	return false
 }
 
-var xhr = new window.XMLHttpRequest()
-xhr.open('GET', '/')
+var arrayBufferGood = util.isFunction(window.ArrayBuffer) && util.isFunction(window.ArrayBuffer.prototype.slice)
 
-exports.arraybuffer = checkTypeSupport('arraybuffer')
-exports.msstream = checkTypeSupport('ms-stream') && util.isFunction(ArrayBuffer.prototype.slice)
-exports.mozchunkedarraybuffer = checkTypeSupport('moz-chunked-arraybuffer')
+exports.arraybuffer = arrayBufferGood && checkTypeSupport(xhr, 'arraybuffer')
+exports.msstream = arrayBufferGood && checkTypeSupport(xhr, 'ms-stream')
+exports.mozchunkedarraybuffer = arrayBufferGood && checkTypeSupport('moz-chunked-arraybuffer')
 exports.overrideMimeType = util.isFunction(xhr.overrideMimeType)
 
 xhr = null // Help gc

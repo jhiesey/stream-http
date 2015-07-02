@@ -86,10 +86,12 @@ IncomingMessage.prototype._onXHRReadyStateChange = function () {
 
 	var xhr = self._xhr
 
+	var response
 	switch (self._mode) {
 		case 'text': // slice
-			if (xhr.response.length > self._pos) {
-				var newData = xhr.response.substr(self._pos)
+			response = xhr.responseText
+			if (response.length > self._pos) {
+				var newData = response.substr(self._pos)
 				if (self._charset === 'x-user-defined') {
 					var buffer = new Buffer(newData.length)
 					for (var i = 0; i < newData.length; i++)
@@ -99,15 +101,17 @@ IncomingMessage.prototype._onXHRReadyStateChange = function () {
 				} else {
 					self.push(newData, self._charset)
 				}
-				self._pos = xhr.response.length
+				self._pos = response.length
 			}
 			break
 		case 'moz-chunked-arraybuffer': // take whole
-			if (xhr.readyState !== rStates.LOADING || !xhr.response)
+			response = xhr.response
+			if (xhr.readyState !== rStates.LOADING || !response)
 				break
-			self.push(new Buffer(new Uint8Array(xhr.response)))
+			self.push(new Buffer(new Uint8Array(response)))
 			break
 		case 'ms-stream':
+			response = xhr.response
 			if (xhr.readyState !== rStates.LOADING)
 				break
 			var reader = new window.MSStreamReader()
@@ -122,7 +126,7 @@ IncomingMessage.prototype._onXHRReadyStateChange = function () {
 				self.emit('close')
 			}
 			// reader.onerror = ??? // TODO: this
-			reader.readAsArrayBuffer(xhr.response)
+			reader.readAsArrayBuffer(response)
 			break
 	}
 

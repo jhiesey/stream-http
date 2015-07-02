@@ -10,6 +10,7 @@
   "author": "John Hiesey",
   "license": "MIT",
   "dependencies": {
+    "brfs": "^1.4.0",
     "browserify": "^10.2.4",
     "express": "^4.13.0",
     "tape": "^4.0.0",

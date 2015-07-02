@@ -58,7 +58,9 @@ var ClientRequest = module.exports = function (opts) {
 	}
 	self._mode = decideMode(preferBinary)
 
-	self.on('finish', self._onFinish.bind(self))
+	self.on('finish', function () {
+		self._onFinish()
+	})
 }
 
 util.inherits(ClientRequest, stream.Writable)

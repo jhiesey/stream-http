@@ -7,13 +7,13 @@ browsers:
   - name: safari
     version: 5..latest
   - name: ie
-    version: 7..latest
+    version: 8..latest
   - name: opera
     version: 11..latest
   - name: iphone
     version: 4.3..latest
-  - name: ipad
-    version: 4.3..latest
   - name: android
     version: 4.0..latest
 server: ./test/server/index.js
+scripts:
+  - "/polyfill.js"

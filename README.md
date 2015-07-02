@@ -29,7 +29,7 @@ responses, but only for text (FILL IN HERE)
 ## Example
 
 ``` js
-http.get('//bundle.js', function (res) {
+http.get('/bundle.js', function (res) {
 	var div = document.getElementById('result');
 	div.innerHTML += 'GET /beep<br>';
 	

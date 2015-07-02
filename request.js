@@ -18,6 +18,20 @@ var rStates = response.readyStates
 // 	return to
 // }
 
+function decideMode (preferBinary) {
+	if (capability.fetch) {
+		return 'fetch'
+	} else if (capability.mozchunkedarraybuffer) {
+		return 'moz-chunked-arraybuffer'
+	} else if (capability.msstream) {
+		return 'ms-stream'
+	} else if (capability.arraybuffer && preferBinary) {
+		return 'arraybuffer'
+	} else {
+		return 'text'
+	}
+}
+
 var ClientRequest = module.exports = function (opts) {
 	var self = this
 	stream.Writable.call(self)
@@ -29,7 +43,20 @@ var ClientRequest = module.exports = function (opts) {
 		self.setHeader(name, opts.headers[name])
 	})
 
-	self._mode = capability.mode
+	var preferBinary
+	if (opts.mode === 'prefer-stream') {
+		// If streaming is a high priority but binary compatibility isn't
+		preferBinary = false
+	} else if (opts.mode === 'prefer-binary') {
+		// If binary compatibility is the highest priority
+		preferBinary = true
+	} else if (!opts.mode || opts.mode === 'default') {
+		// By default, use binary if text streaming may corrupt data
+		preferBinary = !capability.overrideMimeType
+	} else {
+		throw new Error('Invalid value for opts.mode')
+	}
+	self._mode = decideMode(preferBinary)
 
 	self.on('finish', self._onFinish.bind(self))
 }

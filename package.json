@@ -3,13 +3,20 @@
   "version": "1.0.0",
   "description": "Streaming http in the browser",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jhiesey/httpstream.git"
+  },
   "scripts": {
     "build": "browserify index.js -s http > bundle.js",
-    "test": "zuul -- test/*.js"
+    "test": "zuul -- test/tests/*.js",
+    "test-local": "zuul --local 8080 --no-coverage -- test/tests/*/js"
   },
   "author": "John Hiesey",
   "license": "MIT",
   "dependencies": {
+  },
+  "devDependencies": {
     "brfs": "^1.4.0",
     "browserify": "^10.2.4",
     "express": "^4.13.0",

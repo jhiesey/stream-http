@@ -8,7 +8,6 @@
     "url": "git://github.com/jhiesey/httpstream.git"
   },
   "scripts": {
-    "build": "browserify index.js -s http > bundle.js",
     "test": "zuul -- test/tests/*.js",
     "test-local": "zuul --local 8080 --no-coverage -- test/tests/*.js"
   },
@@ -20,7 +19,6 @@
   },
   "devDependencies": {
     "brfs": "^1.4.0",
-    "browserify": "^10.2.4",
     "express": "^4.13.0",
     "tape": "^4.0.0",
     "zuul": "^3.1.0"

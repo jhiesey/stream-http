@@ -16,11 +16,10 @@ test('binary download', function (t) {
 		var buffers = []
 
 		res.on('end', function () {
-			if (skipVerification) {
+			if (skipVerification)
 				t.skip('binary data not preserved on IE <= 8')
-			} else {
+			else
 				t.ok(reference.equals(Buffer.concat(buffers)), 'contents match')
-			}
 			t.end()
 		})
 

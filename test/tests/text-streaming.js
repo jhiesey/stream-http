@@ -3,18 +3,22 @@ var fs = require('fs');
 var test = require('tape')
 var UAParser = require('ua-parser-js')
 
-var browserType = (new UAParser()).setUA(navigator.userAgent).getBrowser()
-// Streaming doesn't work in IE8 or below
-var skipStreamingCheck = (browserType.name === 'IE' && browserType.major <= 8)
+var http = require('../..')
+
+var browser = (new UAParser()).setUA(navigator.userAgent).getBrowser()
+var browserName = browser.name
+var browserVersion = browser.major
+// Streaming doesn't work in IE9 or below or in Opera
+var skipStreamingCheck = (browserName === 'Opera' || (browserName === 'IE' && browserVersion <= 9))
 
 var COPIES = 1000
 var MIN_PIECES = 5
 
 var referenceOnce = fs.readFileSync(__dirname + '/../server/static/basic.txt');
 var reference = new Buffer(referenceOnce.length * COPIES)
-reference.fill(referenceOnce)
-
-var http = require('../..')
+for(var i = 0; i < COPIES; i++) {
+	referenceOnce.copy(reference, referenceOnce.length * i)
+}
 
 test('text streaming', function (t) {
 	http.get({

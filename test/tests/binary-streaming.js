@@ -9,13 +9,12 @@ var browser = (new UAParser()).setUA(navigator.userAgent).getBrowser()
 var browserName = browser.name
 var browserVersion = browser.major
 // Binary streaming doesn't work in IE10 or below or in Opera
-var skipStreamingCheck = (browserName === 'Opera' ||
-	(browserName === 'IE' && browserVersion <= 10))
+var skipStreamingCheck = (browserName === 'Opera' || (browserName === 'IE' && browserVersion <= 10))
 
 // Binary data gets corrupted in IE8 or below
 var skipVerification = (browserName === 'IE' && browserVersion <= 8)
 
-var COPIES = 8
+var COPIES = 10
 var MIN_PIECES = 2
 
 var referenceOnce = fs.readFileSync(__dirname + '/../server/static/browserify.png');

@@ -8,8 +8,10 @@
     "url": "git://github.com/jhiesey/httpstream.git"
   },
   "scripts": {
-    "test": "zuul -- test/tests/*.js",
-    "test-local": "zuul --local 8080 --no-coverage -- test/tests/*.js"
+    "test": "npm run test-node && npm run test-browser",
+    "test-node": "tape test/node/*.js",
+    "test-browser": "zuul -- test/browser/*.js",
+    "test-browser-local": "zuul --local 8080 --no-coverage -- test/browser/*.js"
   },
   "author": "John Hiesey",
   "license": "MIT",

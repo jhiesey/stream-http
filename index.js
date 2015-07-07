@@ -24,7 +24,10 @@ http.request = function (opts, cb) {
 	opts.hostname = opts.hostname || hostHostname || window.location.hostname
 	opts.port = opts.port || hostPort || defaultPort
 
-	// Also valid opts.auth, opts.credentials, opts.mode
+	if (util.isUndefined(opts.withCredentials))
+		opts.withCredentials = true
+
+	// Also valid opts.auth, opts.mode
 
 	var req = new ClientRequest(opts)
 	if (cb)

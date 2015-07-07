@@ -1,10 +1,10 @@
 var Buffer = require('buffer').Buffer
-var fs = require('fs');
+var fs = require('fs')
 var test = require('tape')
 
 var http = require('../..')
 
-var reference = fs.readFileSync(__dirname + '/../server/static/basic.txt');
+var reference = fs.readFileSync(__dirname + '/../server/static/basic.txt')
 
 test('basic functionality', function (t) {
 	http.get('/basic.txt', function (res) {

@@ -1,5 +1,5 @@
 var Buffer = require('buffer').Buffer
-var fs = require('fs');
+var fs = require('fs')
 var test = require('tape')
 var UAParser = require('ua-parser-js')
 
@@ -17,7 +17,7 @@ var skipVerification = (browserName === 'IE' && browserVersion <= 8)
 var COPIES = 10
 var MIN_PIECES = 2
 
-var referenceOnce = fs.readFileSync(__dirname + '/../server/static/browserify.png');
+var referenceOnce = fs.readFileSync(__dirname + '/../server/static/browserify.png')
 var reference = new Buffer(referenceOnce.length * COPIES)
 for(var i = 0; i < COPIES; i++) {
 	referenceOnce.copy(reference, referenceOnce.length * i)

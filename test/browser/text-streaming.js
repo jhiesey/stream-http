@@ -1,5 +1,5 @@
 var Buffer = require('buffer').Buffer
-var fs = require('fs');
+var fs = require('fs')
 var test = require('tape')
 var UAParser = require('ua-parser-js')
 
@@ -14,7 +14,7 @@ var skipStreamingCheck = (browserName === 'Opera' || (browserName === 'IE' && br
 var COPIES = 1000
 var MIN_PIECES = 5
 
-var referenceOnce = fs.readFileSync(__dirname + '/../server/static/basic.txt');
+var referenceOnce = fs.readFileSync(__dirname + '/../server/static/basic.txt')
 var reference = new Buffer(referenceOnce.length * COPIES)
 for(var i = 0; i < COPIES; i++) {
 	referenceOnce.copy(reference, referenceOnce.length * i)

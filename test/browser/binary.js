@@ -1,5 +1,5 @@
 var Buffer = require('buffer').Buffer
-var fs = require('fs');
+var fs = require('fs')
 var test = require('tape')
 var UAParser = require('ua-parser-js')
 
@@ -11,7 +11,7 @@ var browserVersion = browser.major
 // Binary data gets corrupted in IE8 or below
 var skipVerification = (browserName === 'IE' && browserVersion <= 8)
 
-var reference = fs.readFileSync(__dirname + '/../server/static/browserify.png');
+var reference = fs.readFileSync(__dirname + '/../server/static/browserify.png')
 
 test('binary download', function (t) {
 	http.get('/browserify.png', function (res) {

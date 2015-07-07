@@ -20,6 +20,7 @@
     "object-keys": "^1.0.4"
   },
   "devDependencies": {
+    "basic-auth": "^1.0.3",
     "brfs": "^1.4.0",
     "express": "^4.13.0",
     "tape": "^4.0.0",

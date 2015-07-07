@@ -1,3 +1,4 @@
+var basicAuth = require('basic-auth')
 var express = require('express')
 var fs = require('fs')
 var http = require('http')
@@ -20,7 +21,7 @@ var copiesMimeTypes = {
 
 var maxDelay = 5000 // ms
 
-app.use('/testHeaders', function (req, res, next) {
+app.get('/testHeaders', function (req, res) {
 	var parsed = url.parse(req.url, true)
 
 	// Values in query parameters are sent as response headers
@@ -42,6 +43,20 @@ app.use('/testHeaders', function (req, res, next) {
 	res.setHeader('Content-Length', body.length)
 	res.write(body)
 	res.end()
+})
+
+app.get('/auth', function (req, res) {
+	var user = basicAuth(req)
+
+	if (!user || user.name !== 'TestUser' || user.pass !== 'trustno1') {
+		console.log(user)
+		res.setHeader('WWW-Authenticate', 'Basic realm="example"')
+		res.end('Access denied')
+	} else {
+		res.setHeader('Content-Type', 'text/plain')
+		res.write('You\'re in!')
+		res.end()
+	}
 })
 
 app.use(function (req, res, next) {

@@ -59,6 +59,11 @@ app.get('/auth', function (req, res) {
 	}
 })
 
+app.post('/echo', function (req, res) {
+	res.setHeader('Content-Type', 'application/octet-stream')
+	req.pipe(res)
+})
+
 app.use(function (req, res, next) {
 	var parsed = url.parse(req.url, true)
 

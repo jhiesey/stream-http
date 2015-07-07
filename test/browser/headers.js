@@ -1,5 +1,6 @@
 var Buffer = require('buffer').Buffer
 var fs = require('fs')
+var keys = require('object-keys')
 var test = require('tape')
 
 var http = require('../..')
@@ -35,7 +36,7 @@ test('headers', function (t) {
 			var body = JSON.parse(Buffer.concat(buffers).toString())
 			t.equal(body['test-request-header'], 'foo', 'request header 1')
 			t.equal(body['test-request-header-2'], 'FOO2', 'request header 2')
-			t.equal(Object.keys(body).length, 2, 'correct number of request headers')
+			t.equal(keys(body).length, 2, 'correct number of request headers')
 			t.end()
 		})
 

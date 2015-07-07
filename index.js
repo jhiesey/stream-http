@@ -1,4 +1,5 @@
 var ClientRequest = require('./lib/request')
+var extend = require('xtend')
 var url = require('url')
 var util = require('util')
 
@@ -8,7 +9,7 @@ http.request = function (opts, cb) {
 	if (typeof opts === 'string')
 		opts = url.parse(opts)
 	else
-		opts = util._extend({}, opts)
+		opts = extend(opts)
 
 	// Split opts.host into its components
 	var hostHostname = opts.host ? opts.host.split(':')[0] : null

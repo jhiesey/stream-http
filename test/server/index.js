@@ -20,6 +20,30 @@ var copiesMimeTypes = {
 
 var maxDelay = 5000 // ms
 
+app.use('/testHeaders', function (req, res, next) {
+	var parsed = url.parse(req.url, true)
+
+	// Values in query parameters are sent as response headers
+	Object.keys(parsed.query).forEach(function (key) {
+		res.setHeader('Test-' + key, parsed.query[key])
+	})
+
+	res.setHeader('Content-Type', 'application/json')
+
+	// Request headers are sent in the body as json
+	var reqHeaders = {}
+	Object.keys(req.headers).forEach(function (key) {
+		key = key.toLowerCase()
+		if (key.indexOf('test-') === 0)
+			reqHeaders[key] = req.headers[key]
+	})
+
+	var body = JSON.stringify(reqHeaders)
+	res.setHeader('Content-Length', body.length)
+	res.write(body)
+	res.end()
+})
+
 app.use(function (req, res, next) {
 	var parsed = url.parse(req.url, true)
 
@@ -60,5 +84,5 @@ app.use(function (req, res, next) {
 app.use(express.static(path.join(__dirname, 'static')))
 
 var port = parseInt(process.env.ZUUL_PORT) || 8199
-console.log('server listening on port', port)
+console.log('Test server listening on port', port)
 server.listen(port)

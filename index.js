@@ -1,20 +1,31 @@
 var ClientRequest = require('./lib/request')
 var url = require('url')
+var util = require('util')
 
 var http = exports
 
 http.request = function (opts, cb) {
 	if (typeof opts === 'string')
 		opts = url.parse(opts)
+	else
+		opts = util._extend({}, opts)
+
+	// Split opts.host into its components
+	var hostHostname = opts.host ? opts.host.split(':')[0] : null
+	var hostPort = opts.host ? parseInt(opts.host.split(':')[1], 10) : null
 
 	opts.method = opts.method || 'GET'
 	opts.headers = opts.headers || {}
-	opts.protocol = opts.protocol || window.location.protocol
-	opts.hostname = opts.hostname || window.location.hostname
 	opts.path = opts.path || '/'
-	opts.port = opts.port || parseInt(window.location.port, 10)
+	// If the hostname is specified, use that. If it isn't, just let the browser's
+	// logic figure it out
+	opts.hostname = opts.hostname || hostHostname
+	// If port is specified, use that. If it isn't, just let the browser's logic
+	// figure it out; i.e. use port 80/443 for absolute urls and window.location.port
+	// for relative urls
+	opts.port = opts.port || hostPort
 
-	// also valid: port, auth, credentials
+	// Also valid: opts.protocol, opts.auth, opts.credentials
 
 	var req = new ClientRequest(opts)
 	if (cb)
@@ -23,7 +34,6 @@ http.request = function (opts, cb) {
 }
 
 http.get = function get (opts, cb) {
-	opts.method = 'GET'
 	var req = http.request(opts, cb)
 	req.end()
 	return req

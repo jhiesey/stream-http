@@ -17,15 +17,14 @@ http.request = function (opts, cb) {
 	opts.method = opts.method || 'GET'
 	opts.headers = opts.headers || {}
 	opts.path = opts.path || '/'
-	// If the hostname is specified, use that. If it isn't, just let the browser's
-	// logic figure it out
-	opts.hostname = opts.hostname || hostHostname
-	// If port is specified, use that. If it isn't, just let the browser's logic
-	// figure it out; i.e. use port 80/443 for absolute urls and window.location.port
-	// for relative urls
-	opts.port = opts.port || hostPort
+	opts.protocol = opts.protocol || window.location.protocol
+	// If the hostname is provided, use the default port for the protocol. If
+	// the url is instead relative, use window.location.port
+	var defaultPort = (opts.hostname || hostHostname) ? (opts.protocol === 'https:' ? 443 : 80) : window.location.port
+	opts.hostname = opts.hostname || hostHostname || window.location.hostname
+	opts.port = opts.port || hostPort || defaultPort
 
-	// Also valid: opts.protocol, opts.auth, opts.credentials
+	// Also valid opts.auth, opts.credentials, opts.mode
 
 	var req = new ClientRequest(opts)
 	if (cb)

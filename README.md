@@ -90,4 +90,6 @@ http.get('/bundle.js', function (res) {
 })
 ```
 
-License: MIT
+## License
+
+MIT. Copyright (C) John Hiesey and other contributors.

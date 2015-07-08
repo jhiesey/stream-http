@@ -14,7 +14,7 @@ var skipStreamingCheck = (browserName === 'Opera' || (browserName === 'IE' && br
 // Binary data gets corrupted in IE8 or below
 var skipVerification = (browserName === 'IE' && browserVersion <= 8)
 
-var COPIES = 10
+var COPIES = 5
 var MIN_PIECES = 2
 
 var referenceOnce = fs.readFileSync(__dirname + '/../server/static/browserify.png')

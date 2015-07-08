@@ -11,7 +11,9 @@ var browserVersion = browser.major
 // Binary request bodies don't work in a bunch of browsers
 var skipVerification = ((browserName === 'Opera' && browserVersion <= 11) ||
 	(browserName === 'IE' && browserVersion <= 10) ||
-	(browserName.indexOf('Safari') !== -1 && browserVersion <= 5))
+	(browserName === 'Safari' && browserVersion <= 5) ||
+	(browserName === 'WebKit' && browserVersion <= 534) || // Old mobile safari
+	(browserName === 'Android Browser' && browserVersion <= 4))
 
 var reference = fs.readFileSync(__dirname + '/../server/static/browserify.png')
 

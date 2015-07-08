@@ -3,7 +3,7 @@ var test = require('tape')
 
 var http = require('../..')
 
-test('Authentication', function (t) {
+test('authentication', function (t) {
 	http.get({
 		path: '/auth',
 		auth: 'TestUser:trustno1'

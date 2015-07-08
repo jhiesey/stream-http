@@ -48,7 +48,7 @@ test('binary streaming', function (t) {
 test('large binary request without streaming', function (t) {
 	http.get({
 		path: '/browserify.png?copies=' + COPIES,
-		mode: 'prefer-binary',
+		mode: 'prefer-fast',
 	}, function (res) {
 		var buffers = []
 		res.on('end', function () {

@@ -44,3 +44,23 @@ test('binary streaming', function (t) {
 		})
 	})
 })
+
+test('large binary request without streaming', function (t) {
+	http.get({
+		path: '/browserify.png?copies=' + COPIES,
+		mode: 'prefer-binary',
+	}, function (res) {
+		var buffers = []
+		res.on('end', function () {
+			if (skipVerification)
+				t.skip('binary data not preserved on IE <= 8')
+			else
+				t.ok(reference.equals(Buffer.concat(buffers)), 'contents match')
+			t.end()
+		})
+
+		res.on('data', function (data) {
+			buffers.push(data)
+		})
+	})
+})

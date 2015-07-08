@@ -1,4 +1,6 @@
-# httpstream
+# httpstream [![Build Status](https://travis-ci.org/jhiesey/httpstream.svg?branch=master)](https://travis-ci.org/jhiesey/httpstream)
+
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/jhiesey.svg)](https://saucelabs.com/u/jhiesey)
 
 This module is an implementation of node's native `http` module for the browser.
 It tries to match node's api and behavior as closely as possible, but some features

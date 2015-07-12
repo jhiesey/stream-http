@@ -1,4 +1,4 @@
-# httpstream [![Build Status](https://travis-ci.org/jhiesey/httpstream.svg?branch=master)](https://travis-ci.org/jhiesey/httpstream)
+# stream-http [![Build Status](https://travis-ci.org/jhiesey/stream-http.svg?branch=master)](https://travis-ci.org/jhiesey/stream-http)
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/jhiesey.svg)](https://saucelabs.com/u/jhiesey)
 
@@ -10,7 +10,7 @@ This is heavily inspired by, and intended to replace, [http-browserify](https://
 
 ## What does it do?
 
-In accordance with its name, `httpstream` tries to provide data to its caller before
+In accordance with its name, `stream-http` tries to provide data to its caller before
 the request has completed whenever possible.
 
 The following browsers support true streaming, where only a small amount of the request

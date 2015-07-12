@@ -1,11 +1,11 @@
 {
-  "name": "httpstream",
+  "name": "stream-http",
   "version": "1.0.0",
   "description": "Streaming http in the browser",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/jhiesey/httpstream.git"
+    "url": "git://github.com/jhiesey/stream-http.git"
   },
   "scripts": {
     "test": "npm run test-node && npm run test-browser",

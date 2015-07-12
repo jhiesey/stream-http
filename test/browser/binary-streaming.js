@@ -14,7 +14,9 @@ var skipStreamingCheck = (browserName === 'Opera' || (browserName === 'IE' && br
 // Binary data gets corrupted in IE8 or below
 var skipVerification = (browserName === 'IE' && browserVersion <= 8)
 
-var COPIES = 5
+// IE8 tends to throw up modal dialogs complaining about scripts running too long
+// Since streaming doesn't actually work there anyway, just use one copy
+var COPIES = skipVerification ? 1 : 12
 var MIN_PIECES = 2
 
 var referenceOnce = fs.readFileSync(__dirname + '/../server/static/browserify.png')

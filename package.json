@@ -16,6 +16,7 @@
   "author": "John Hiesey",
   "license": "MIT",
   "dependencies": {
+    "builtin-status-codes": "~1.0.0",
     "foreach": "^2.0.5",
     "object-keys": "1.0.4",
     "xtend": "^4.0.0"

@@ -8,12 +8,6 @@ var url = require('url')
 var app = express()
 var server = http.createServer(app)
 
-// app.use(function (req, res, next) {
-//   res.header('Access-Control-Allow-Origin', '*')
-
-//   next()
-// })
-
 // Otherwise, use 'application/octet-stream'
 var copiesMimeTypes = {
 	'/basic.txt': 'text/plain'

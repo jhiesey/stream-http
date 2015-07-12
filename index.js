@@ -2,7 +2,6 @@ var ClientRequest = require('./lib/request')
 var extend = require('xtend')
 var statusCodes = require('builtin-status-codes')
 var url = require('url')
-var util = require('util')
 
 var http = exports
 
@@ -26,7 +25,7 @@ http.request = function (opts, cb) {
 	opts.hostname = opts.hostname || hostHostname || window.location.hostname
 	opts.port = opts.port || hostPort || defaultPort
 
-	if (util.isUndefined(opts.withCredentials))
+	if (opts.withCredentials === undefined)
 		opts.withCredentials = true
 
 	// Also valid opts.auth, opts.mode

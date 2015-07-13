@@ -1,6 +1,6 @@
 {
   "name": "stream-http",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "Streaming http in the browser",
   "main": "index.js",
   "repository": {

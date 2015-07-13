@@ -50,7 +50,6 @@ app.get('/auth', function (req, res) {
 	var user = basicAuth(req)
 
 	if (!user || user.name !== 'TestUser' || user.pass !== 'trustno1') {
-		console.log(user)
 		res.setHeader('WWW-Authenticate', 'Basic realm="example"')
 		res.end('Access denied')
 	} else {
@@ -69,7 +68,6 @@ app.use(function (req, res, next) {
 	var parsed = url.parse(req.url, true)
 
 	if ('copies' in parsed.query) {
-		console.log('new request:', parsed.path)
 		var totalCopies = parseInt(parsed.query.copies, 10)
 		function fail () {
 			res.statusCode = 500
@@ -90,8 +88,6 @@ app.use(function (req, res, next) {
 				if (copies === 0) 
 					return res.end()
 
-				if (parsed.path.indexOf('browserify.png') >= 0)
-					console.log('writing', data.length, 'bytes')
 				res.write(data, function (err) {
 					if (err)
 						return fail()

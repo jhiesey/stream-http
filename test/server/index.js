@@ -15,6 +15,13 @@ var copiesMimeTypes = {
 
 var maxDelay = 5000 // ms
 
+// This should make sure bodies aren't cached
+// so the streaming tests always pass
+app.use(function (req, res, next) {
+	res.setHeader('Cache-Control', 'no-store')
+	next()
+})
+
 app.get('/testHeaders', function (req, res) {
 	var parsed = url.parse(req.url, true)
 
@@ -62,6 +69,7 @@ app.use(function (req, res, next) {
 	var parsed = url.parse(req.url, true)
 
 	if ('copies' in parsed.query) {
+		console.log('new request:', parsed.path)
 		var totalCopies = parseInt(parsed.query.copies, 10)
 		function fail () {
 			res.statusCode = 500
@@ -82,6 +90,8 @@ app.use(function (req, res, next) {
 				if (copies === 0) 
 					return res.end()
 
+				if (parsed.path.indexOf('browserify.png') >= 0)
+					console.log('writing', data.length, 'bytes')
 				res.write(data, function (err) {
 					if (err)
 						return fail()

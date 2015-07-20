@@ -1,3 +1,4 @@
+var cookieParser = require('cookie-parser')
 var basicAuth = require('basic-auth')
 var express = require('express')
 var fs = require('fs')
@@ -43,6 +44,12 @@ app.get('/testHeaders', function (req, res) {
 	var body = JSON.stringify(reqHeaders)
 	res.setHeader('Content-Length', body.length)
 	res.write(body)
+	res.end()
+})
+
+app.get('/cookie', cookieParser(), function (req, res) {
+	res.setHeader('Content-Type', 'text/plain')
+	res.write('hello=' + req.cookies.hello)
 	res.end()
 })
 

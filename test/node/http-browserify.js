@@ -85,7 +85,7 @@ test('Test withCredentials param', function(t) {
 	t.equal( request._xhr.withCredentials, true, 'xhr.withCredentials should be true')
 
 	var request = http.get({ url: url }, noop)
-	t.equal( request._xhr.withCredentials, true, 'xhr.withCredentials should be true')
+	t.equal( request._xhr.withCredentials, false, 'xhr.withCredentials should be false')
 
 	t.end()
 })

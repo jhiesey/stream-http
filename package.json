@@ -15,6 +15,13 @@
   },
   "author": "John Hiesey",
   "license": "MIT",
+  "keywords": [
+    "http",
+    "stream",
+    "streaming",
+    "xhr",
+    "http-browserify"
+  ],
   "dependencies": {
     "builtin-status-codes": "~1.0.0",
     "foreach": "^2.0.5",

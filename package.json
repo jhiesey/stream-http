@@ -3,6 +3,10 @@
   "version": "1.3.0",
   "description": "Streaming http in the browser",
   "main": "index.js",
+  "files": [
+    "index.js",
+    "lib"
+  ],
   "repository": {
     "type": "git",
     "url": "git://github.com/jhiesey/stream-http.git"

@@ -45,8 +45,30 @@ http.Agent.defaultMaxSockets = 4
 http.STATUS_CODES = statusCodes
 
 http.METHODS = [
+	'CHECKOUT',
+	'CONNECT',
+	'COPY',
+	'DELETE',
 	'GET',
+	'HEAD',
+	'LOCK',
+	'M-SEARCH',
+	'MERGE',
+	'MKACTIVITY',
+	'MKCOL',
+	'MOVE',
+	'NOTIFY',
+	'OPTIONS',
+	'PATCH',
 	'POST',
+	'PROPFIND',
+	'PROPPATCH',
+	'PURGE',
 	'PUT',
-	'DELETE' // TODO: include the methods from RFC 2616 and 2518?
+	'REPORT',
+	'SEARCH',
+	'SUBSCRIBE',
+	'TRACE',
+	'UNLOCK',
+	'UNSUBSCRIBE'
 ]

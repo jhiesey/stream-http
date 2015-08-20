@@ -2,6 +2,7 @@ var Buffer = require('buffer').Buffer
 var fs = require('fs')
 var keys = require('object-keys')
 var test = require('tape')
+var UAParser = require('ua-parser-js')
 
 var http = require('../..')
 
@@ -52,5 +53,33 @@ test('headers', function (t) {
 		res.on('data', function (data) {
 			buffers.push(data)
 		})
+	})
+})
+
+test('content-type response header', function (t) {
+	http.get('/testHeaders', function (res) {
+		t.equal(res.headers['content-type'], 'application/json', 'content-type preserved')
+		t.end()
+	})
+})
+
+var browser = (new UAParser()).setUA(navigator.userAgent).getBrowser()
+var browserName = browser.name
+var browserVersion = browser.major
+// The content-type header is broken when 'prefer-streaming' or 'allow-wrong-content-type'
+// is passed in browsers that rely on xhr.overrideMimeType(), namely older chrome and newer safari
+var wrongMimeType = ((browserName === 'Chrome' && browserVersion <= 42) ||
+	((browserName === 'Safari' || browserName === 'Mobile Safari') && browserVersion >= 6))
+
+test('content-type response header with forced streaming', function (t) {
+	http.get({
+		path: '/testHeaders',
+		mode: 'prefer-streaming'
+	}, function (res) {
+		if (wrongMimeType)
+			t.equal(res.headers['content-type'], 'text/plain; charset=x-user-defined', 'content-type overridden')
+		else
+			t.equal(res.headers['content-type'], 'application/json', 'content-type preserved')
+		t.end()
 	})
 })

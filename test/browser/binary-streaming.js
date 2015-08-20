@@ -26,7 +26,10 @@ for(var i = 0; i < COPIES; i++) {
 }
 
 test('binary streaming', function (t) {
-	http.get('/browserify.png?copies=' + COPIES, function (res) {
+	http.get({
+		path: '/browserify.png?copies=' + COPIES,
+		mode: 'allow-wrong-content-type'
+	}, function (res) {
 		var buffers = []
 		res.on('end', function () {
 			if (skipVerification)
@@ -50,7 +53,7 @@ test('binary streaming', function (t) {
 test('large binary request without streaming', function (t) {
 	http.get({
 		path: '/browserify.png?copies=' + COPIES,
-		mode: 'prefer-fast',
+		mode: 'default',
 	}, function (res) {
 		var buffers = []
 		res.on('end', function () {

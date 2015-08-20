@@ -51,14 +51,21 @@ but sometimes it helps to get a little input from the user.
 * The `options.mode` field passed into `http.request` or `http.get` can take on one of the
 following values:
   * 'default' (or any falsy value, including undefined): Try to provide partial data before
-the equest completes, but not at the cost of correctness for binary data. In some cases
-the implementation may be a bit slow.
+the request completes, but not at the cost of correctness for binary data or correctness of
+the 'content-type' response header. This mode will also avoid slower code paths whenever
+possible, which is particularly useful when making large requests in a browser like Safari
+that has a weaker javascript engine.
+  * 'allow-wrong-content-type': Provides partial data in more cases than 'default', but
+at the expense of causing the 'content-type' response header to be incorrectly reported
+(as 'text/plain; charset=x-user-defined') in some browsers, notably Safari and Chrome 42
+and older. Preserves binary data whenever possible. In some cases the implementation may
+also be a bit slow. This was the default in versions of this module before 1.5.
   * 'prefer-stream': Provide data before the request completes even if binary data (anything
 that isn't a single-byte ASCII or utf8 character) will be corrupted. Of course, this option
-is only safe for text data.
-  * 'prefer-fast': Use an implementation that does less processing even if it means that
-partial data isn't available. This is particularly useful when making large requests in
-a browser like Safari that has a weaker javascript engine.
+is only safe for text data. May also cause the 'content-type' response header to be
+incorrectly reported (as 'text/plain; charset=x-user-defined').
+  * 'prefer-fast': Deprecated; now a synonym for 'default', which has the same performance
+characteristics as this mode did in versions before 1.5.
 
 ### Features missing compared to node
 

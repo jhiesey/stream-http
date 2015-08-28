@@ -42,7 +42,7 @@ node docs for how these work.
 ### Extra features compared to node
 
 * The `options.withCredentials` boolean flag, used to indicate if the browser should send
-cookies or authentication information with a CORS request. Default true.
+cookies or authentication information with a CORS request. Default false.
 
 This module has to make some tradeoffs to support binary data and/or streaming. Generally,
 the module can make a fairly good decision about which underlying browser features to use,

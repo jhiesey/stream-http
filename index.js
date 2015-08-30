@@ -18,7 +18,9 @@ http.request = function (opts, cb) {
 	opts.method = opts.method || 'GET'
 	opts.headers = opts.headers || {}
 	opts.path = opts.path || '/'
-	opts.protocol = opts.protocol || window.location.protocol
+	// https-browserify deelegates to us and sets ops.scheme to 'https'
+	var scheme = opts.scheme ? opts.scheme + ':' : null
+	opts.protocol = opts.protocol || scheme || window.location.protocol
 	// If the hostname is provided, use the default port for the protocol. If
 	// the url is instead relative, use window.location.port
 	var defaultPort = (opts.hostname || hostHostname) ? (opts.protocol === 'https:' ? 443 : 80) : window.location.port

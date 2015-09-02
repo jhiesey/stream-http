@@ -6,7 +6,8 @@ global.window = {}
 window.location = {
 		hostname: 'localhost',
 		port: 8081,
-		protocol: 'http:'
+		protocol: 'http:',
+		pathname: '/foo/123'
 }
 
 var noop = function() {}
@@ -49,6 +50,14 @@ test('Test full url object', function(t) {
 	t.equal( request._url, 'http://localhost:8081/api/foo?bar=baz', 'Url should be correct')
 	t.end()
 
+})
+
+test('Test relative url', function(t) {
+	var params = { path: './bar' }
+	var request = http.get(params, noop)
+
+	t.equal( request._url, 'http://localhost:8081/foo/bar', 'Url should be correct')
+	t.end()
 })
 
 test('Test alt protocol', function(t) {

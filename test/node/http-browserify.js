@@ -24,7 +24,7 @@ test('Test simple url string', function(t) {
 	var url = { path: '/api/foo' }
 	var request = http.get(url, noop)
 
-	t.equal( request._url, 'http://localhost:8081/api/foo', 'Url should be correct')
+	t.equal(request._url, 'http://localhost:8081/api/foo', 'Url should be correct')
 	t.end()
 
 })
@@ -46,9 +46,8 @@ test('Test full url object', function(t) {
 
 	var request = http.get(url, noop)
 
-	t.equal( request._url, 'http://localhost:8081/api/foo?bar=baz', 'Url should be correct')
+	t.equal(request._url, 'http://localhost:8081/api/foo?bar=baz', 'Url should be correct')
 	t.end()
-
 })
 
 test('Test alt protocol', function(t) {
@@ -61,31 +60,29 @@ test('Test alt protocol', function(t) {
 
 	var request = http.get(params, noop)
 
-	t.equal( request._url, 'foo://localhost:3000/bar', 'Url should be correct')
+	t.equal(request._url, 'foo://localhost:3000/bar', 'Url should be correct')
 	t.end()
-
 })
 
 test('Test string as parameters', function(t) {
 	var url = '/api/foo'
 	var request = http.get(url, noop)
 
-	t.equal( request._url, 'http://localhost:8081/api/foo', 'Url should be correct')
+	t.equal(request._url, 'http://localhost:8081/api/foo', 'Url should be correct')
 	t.end()
-
 })
 
 test('Test withCredentials param', function(t) {
 	var url = '/api/foo'
 
 	var request = http.get({ url: url, withCredentials: false }, noop)
-	t.equal( request._xhr.withCredentials, false, 'xhr.withCredentials should be false')
+	t.equal(request._xhr.withCredentials, false, 'xhr.withCredentials should be false')
 
 	var request = http.get({ url: url, withCredentials: true }, noop)
-	t.equal( request._xhr.withCredentials, true, 'xhr.withCredentials should be true')
+	t.equal(request._xhr.withCredentials, true, 'xhr.withCredentials should be true')
 
 	var request = http.get({ url: url }, noop)
-	t.equal( request._xhr.withCredentials, false, 'xhr.withCredentials should be false')
+	t.equal(request._xhr.withCredentials, false, 'xhr.withCredentials should be false')
 
 	t.end()
 })
@@ -94,7 +91,7 @@ test('Test ipv6 address', function(t) {
 	var url = 'http://[::1]:80/foo'
 	var request = http.get(url, noop)
 
-	t.equal( request._url, 'http://[::1]:80/foo', 'Url should be correct')
+	t.equal(request._url, 'http://[::1]:80/foo', 'Url should be correct')
 	t.end()
 })
 

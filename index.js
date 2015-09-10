@@ -25,6 +25,10 @@ http.request = function (opts, cb) {
 	opts.hostname = opts.hostname || hostHostname || window.location.hostname
 	opts.port = opts.port || hostPort || defaultPort
 
+	if (opts.path.indexOf('./') == 0) {
+		opts.path = window.location.pathname.slice(0, window.location.pathname.lastIndexOf('/')) + opts.path.slice(1)
+	}
+
 	// Also valid opts.auth, opts.mode
 
 	var req = new ClientRequest(opts)

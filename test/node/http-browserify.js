@@ -90,6 +90,14 @@ test('Test withCredentials param', function(t) {
 	t.end()
 })
 
+test('Test ipv6 address', function(t) {
+	var url = 'http://[::1]:80/foo'
+	var request = http.get(url, noop)
+
+	t.equal( request._url, 'http://[::1]:80/foo', 'Url should be correct')
+	t.end()
+})
+
 test('Cleanup', function (t) {
 	delete global.window
 	delete require.cache[moduleName]

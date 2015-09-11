@@ -1,15 +1,12 @@
 // These tests are teken from http-browserify to ensure compatibility with
 // that module
 var test = require('tape')
+var url = require('url')
 
-global.window = {}
-window.location = {
-		hostname: 'localhost',
-		port: 8081,
-		protocol: 'http:'
-}
+var location = 'http://localhost:8081'
 
 var noop = function() {}
+global.window = {}
 window.XMLHttpRequest = function() {
 	this.open = noop
 	this.send = noop
@@ -21,16 +18,17 @@ delete require.cache[moduleName]
 var http = require('../../')
 
 test('Test simple url string', function(t) {
-	var url = { path: '/api/foo' }
-	var request = http.get(url, noop)
+	var testUrl = { path: '/api/foo' }
+	var request = http.get(testUrl, noop)
 
-	t.equal(request._url, 'http://localhost:8081/api/foo', 'Url should be correct')
+	var resolved = url.resolve(location, request._opts.url)
+	t.equal(resolved, 'http://localhost:8081/api/foo', 'Url should be correct')
 	t.end()
 
 })
 
 test('Test full url object', function(t) {
-	var url = {
+	var testUrl = {
 		host: "localhost:8081",
 		hostname: "localhost",
 		href: "http://localhost:8081/api/foo?bar=baz",
@@ -44,9 +42,10 @@ test('Test full url object', function(t) {
 		slashes: true
 	}
 
-	var request = http.get(url, noop)
+	var request = http.get(testUrl, noop)
 
-	t.equal(request._url, 'http://localhost:8081/api/foo?bar=baz', 'Url should be correct')
+	var resolved = url.resolve(location, request._opts.url)
+	t.equal(resolved, 'http://localhost:8081/api/foo?bar=baz', 'Url should be correct')
 	t.end()
 })
 
@@ -60,15 +59,17 @@ test('Test alt protocol', function(t) {
 
 	var request = http.get(params, noop)
 
-	t.equal(request._url, 'foo://localhost:3000/bar', 'Url should be correct')
+	var resolved = url.resolve(location, request._opts.url)
+	t.equal(resolved, 'foo://localhost:3000/bar', 'Url should be correct')
 	t.end()
 })
 
 test('Test string as parameters', function(t) {
-	var url = '/api/foo'
-	var request = http.get(url, noop)
+	var testUrl = '/api/foo'
+	var request = http.get(testUrl, noop)
 
-	t.equal(request._url, 'http://localhost:8081/api/foo', 'Url should be correct')
+	var resolved = url.resolve(location, request._opts.url)
+	t.equal(resolved, 'http://localhost:8081/api/foo', 'Url should be correct')
 	t.end()
 })
 
@@ -88,10 +89,11 @@ test('Test withCredentials param', function(t) {
 })
 
 test('Test ipv6 address', function(t) {
-	var url = 'http://[::1]:80/foo'
-	var request = http.get(url, noop)
+	var testUrl = 'http://[::1]:80/foo'
+	var request = http.get(testUrl, noop)
 
-	t.equal(request._url, 'http://[::1]:80/foo', 'Url should be correct')
+	var resolved = url.resolve(location, request._opts.url)
+	t.equal(resolved, 'http://[::1]:80/foo', 'Url should be correct')
 	t.end()
 })
 

@@ -3,7 +3,7 @@
 var test = require('tape')
 var url = require('url')
 
-var location = 'http://localhost:8081'
+var location = 'http://localhost:8081/foo/123'
 
 var noop = function() {}
 global.window = {}
@@ -94,6 +94,15 @@ test('Test ipv6 address', function(t) {
 
 	var resolved = url.resolve(location, request._opts.url)
 	t.equal(resolved, 'http://[::1]:80/foo', 'Url should be correct')
+	t.end()
+})
+
+test('Test relative path in url', function(t) {
+	var params = { path: './bar' }
+	var request = http.get(params, noop)
+
+	var resolved = url.resolve(location, request._opts.url)
+	t.equal(resolved, 'http://localhost:8081/foo/bar', 'Url should be correct')
 	t.end()
 })
 

@@ -23,11 +23,11 @@
     "http-browserify"
   ],
   "dependencies": {
-    "builtin-status-codes": "~1.0.0",
+    "builtin-status-codes": "^1.0.0",
     "foreach": "^2.0.5",
     "indexof": "0.0.1",
     "inherits": "^2.0.1",
-    "object-keys": "1.0.4",
+    "object-keys": "^1.0.4",
     "xtend": "^4.0.0"
   },
   "devDependencies": {

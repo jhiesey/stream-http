@@ -16,4 +16,5 @@ browsers:
     version: 4.0..latest
 server: ./test/server/index.js
 scripts:
-  - "/polyfill.js"
+  - "/ie8-polyfill.js"
+  - "/test-polyfill.js"

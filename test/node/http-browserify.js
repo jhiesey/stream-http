@@ -6,8 +6,8 @@ var url = require('url')
 var location = 'http://localhost:8081/foo/123'
 
 var noop = function() {}
-global.window = {}
-window.XMLHttpRequest = function() {
+global.location = url.parse(location)
+global.XMLHttpRequest = function() {
 	this.open = noop
 	this.send = noop
 	this.withCredentials = false
@@ -107,7 +107,8 @@ test('Test relative path in url', function(t) {
 })
 
 test('Cleanup', function (t) {
-	delete global.window
+	delete global.location
+	delete global.XMLHttpRequest
 	delete require.cache[moduleName]
 	t.end()
 })

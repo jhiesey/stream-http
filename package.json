@@ -10,7 +10,7 @@
   "scripts": {
     "test": "npm run test-node && npm run test-browser",
     "test-node": "tape test/node/*.js",
-    "test-browser": "zuul -- test/browser/*.js",
+    "test-browser": "zuul --no-coverage -- test/browser/*.js",
     "test-browser-local": "zuul --local 8080 --no-coverage -- test/browser/*.js"
   },
   "author": "John Hiesey",
@@ -37,6 +37,7 @@
     "express": "^4.13.0",
     "tape": "^4.0.0",
     "ua-parser-js": "^0.7.7",
+    "webworkify": "^1.0.2",
     "zuul": "^3.1.0"
   }
 }

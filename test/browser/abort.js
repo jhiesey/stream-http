@@ -30,18 +30,25 @@ test('abort on response', function (t) {
 test('abort on data', function (t) {
 	var req = http.get('/browserify.png?copies=5', function (res) {
 		var firstData = true
+		var failOnData = false
 
 		res.on('end', function () {
 			t.fail('unexpected end')
 		})
 
 		res.on('data', function (data) {
-			if (firstData) {
+			if (failOnData)
+				t.fail('unexpected data')
+			else if (firstData) {
 				firstData = false
 				req.abort()
 				t.end()
-			} else {
-				t.fail('unexpected data')
+				process.nextTick(function () {
+					// Wait for any data that may have been queued
+					// in the stream before considering data events
+					// as errors
+					failOnData = true
+				})
 			}
 		})
 	})

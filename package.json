@@ -36,5 +36,12 @@
     "ua-parser-js": "^0.7.7",
     "webworkify": "^1.0.2",
     "zuul": "^3.1.0"
+  },
+  "jspm": {
+    "map": {
+      "./index.js": {
+        "node": "@node/http"
+      }
+    }
   }
 }

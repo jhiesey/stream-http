@@ -11,7 +11,7 @@ http.request = function (opts, cb) {
 	else
 		opts = extend(opts)
 
-	var protocol = opts.protocol || ''
+	var protocol = opts.protocol || 'http:'
 	var host = opts.hostname || opts.host
 	var port = opts.port
 	var path = opts.path || '/'

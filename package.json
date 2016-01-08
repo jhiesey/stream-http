@@ -8,7 +8,7 @@
     "url": "git://github.com/jhiesey/stream-http.git"
   },
   "scripts": {
-    "test": "npm run test-node && npm run test-browser",
+    "test": "npm run test-node && ([ -n \"${TRAVIS_PULL_REQUEST}\" -a \"${TRAVIS_PULL_REQUEST}\" != 'false' ] || npm run test-browser)",
     "test-node": "tape test/node/*.js",
     "test-browser": "zuul --no-coverage -- test/browser/*.js",
     "test-browser-local": "zuul --local 8080 --no-coverage -- test/browser/*.js"

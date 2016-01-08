@@ -104,6 +104,21 @@ http.get('/bundle.js', function (res) {
 })
 ```
 
+## Running tests
+
+There are two sets of tests: the tests that run in node (found in `test/node`) and the tests
+that run in the browser (found in `test/browser`). Normally the browser tests run on
+[Sauce Labs](http://saucelabs.com/).
+
+Running `npm test` will run both sets of tests, but in order for the Sauce Labs tests to run
+you will need to sign up for an account (free for open source projects) and put the
+credentials in [a `.zuulrc` file](https://github.com/defunctzombie/zuul/wiki/zuulrc).
+
+To run just the node tests, run `npm run test-node`.
+
+To run the browser tests locally, run `npm run test-browser-local` and point your browser to
+`http://localhost:8080/__zuul`
+
 ## License
 
 MIT. Copyright (C) John Hiesey and other contributors.

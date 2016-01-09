@@ -64,6 +64,25 @@ test('Test alt protocol', function(t) {
 	t.end()
 })
 
+test('Test page with \'file:\' protocol', function (t) {
+	var params = {
+		hostname: 'localhost',
+		port: 3000,
+		path: '/bar'
+	}
+
+	var fileLocation = 'file:///home/me/stuff/index.html'
+
+	var normalLocation = global.location
+	global.location = url.parse(fileLocation) // Temporarily change the location
+	var request = http.get(params, noop)
+	global.location = normalLocation // Reset the location
+
+	var resolved = url.resolve(fileLocation, request._opts.url)
+	t.equal(resolved, 'http://localhost:3000/bar', 'Url should be correct')
+	t.end()
+})
+
 test('Test string as parameters', function(t) {
 	var testUrl = '/api/foo'
 	var request = http.get(testUrl, noop)

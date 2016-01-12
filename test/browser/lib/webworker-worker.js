@@ -9,7 +9,7 @@ module.exports = function (self) {
 			var buffers = []
 
 			res.on('end', function () {
-				self.postMessage(Buffer.concat(buffers).toArrayBuffer())
+				self.postMessage(Buffer.concat(buffers).buffer)
 			})
 
 			res.on('data', function (data) {

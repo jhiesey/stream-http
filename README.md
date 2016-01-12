@@ -81,7 +81,7 @@ characteristics as this mode did in versions before 1.5.
 * Any operations, including `request.setTimeout`, that operate directly on the underlying
 socket.
 * Any options that are disallowed for security reasons. This includes setting or getting
-certian headers.
+certain headers.
 * `message.httpVersion`
 * `message.rawHeaders` is modified by the browser, and may not quite match what is sent by
 the server.
@@ -112,7 +112,7 @@ that run in the browser (found in `test/browser`). Normally the browser tests ru
 
 Running `npm test` will run both sets of tests, but in order for the Sauce Labs tests to run
 you will need to sign up for an account (free for open source projects) and put the
-credentials in [a `.zuulrc` file](https://github.com/defunctzombie/zuul/wiki/zuulrc).
+credentials in a [`.zuulrc` file](https://github.com/defunctzombie/zuul/wiki/zuulrc).
 
 To run just the node tests, run `npm run test-node`.
 

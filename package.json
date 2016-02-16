@@ -27,7 +27,7 @@
     "http-browserify"
   ],
   "dependencies": {
-    "builtin-status-codes": "^1.0.0",
+    "builtin-status-codes": "^2.0.0",
     "inherits": "^2.0.1",
     "to-arraybuffer": "^1.0.0",
     "xtend": "^4.0.0"

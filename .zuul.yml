@@ -7,7 +7,7 @@ browsers:
   - name: safari
     version: 5..latest
   - name: microsoftedge
-    version: 20..latest
+    version: 13..latest
   - name: ie
     version: 9..latest
   - name: opera

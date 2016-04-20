@@ -48,6 +48,10 @@ node docs for how these work.
 
 ### Extra features compared to node
 
+* The `message.url` property provides access to the final url after all redirects. This
+is useful since the browser follows all redirects silently, unlike node. It is available
+in Chrome 37 and newer, Firefox 32 and newer, and Safari 9 and newer.
+
 * The `options.withCredentials` boolean flag, used to indicate if the browser should send
 cookies or authentication information with a CORS request. Default false.
 
@@ -86,6 +90,8 @@ certain headers.
 * `message.rawHeaders` is modified by the browser, and may not quite match what is sent by
 the server.
 * `message.trailers` and `message.rawTrailers` will remain empty.
+* Redirects are followed silently by the browser, so it isn't possible to access the 301/302
+redirect pages.
 
 ## Example
 

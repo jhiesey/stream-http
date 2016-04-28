@@ -29,6 +29,7 @@
   "dependencies": {
     "builtin-status-codes": "^2.0.0",
     "inherits": "^2.0.1",
+    "readable-stream": "^2.1.0",
     "to-arraybuffer": "^1.0.0",
     "xtend": "^4.0.0"
   },

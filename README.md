@@ -75,6 +75,8 @@ also be a bit slow. This was the default in versions of this module before 1.5.
 that isn't a single-byte ASCII or utf8 character) will be corrupted. Of course, this option
 is only safe for text data. May also cause the 'content-type' response header to be
 incorrectly reported (as 'text/plain; charset=x-user-defined').
+  * 'disable-fetch': Force the use of plain XHR regardless of the browser declaring a fetch
+capability. Preserves the correctness of binary data and the 'content-type' response header.
   * 'prefer-fast': Deprecated; now a synonym for 'default', which has the same performance
 characteristics as this mode did in versions before 1.5.
 

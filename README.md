@@ -2,11 +2,11 @@
 
 [![Sauce Test Status](https://saucelabs.com/browser-matrix/stream-http.svg)](https://saucelabs.com/u/stream-http)
 
-This module is an implementation of node's native `http` module for the browser.
-It tries to match node's api and behavior as closely as possible, but some features
+This module is an implementation of Node's native `http` module for the browser.
+It tries to match Node's API and behavior as closely as possible, but some features
 aren't available, since browsers don't give nearly as much control over requests.
 
-This is heavily inspired by, and intended to replace, [http-browserify](https://github.com/substack/http-browserify)
+This is heavily inspired by, and intended to replace, [http-browserify](https://github.com/substack/http-browserify).
 
 ## What does it do?
 
@@ -15,7 +15,7 @@ the request has completed whenever possible.
 
 The following browsers support true streaming, where only a small amount of the request
 has to be held in memory at once:
-* Chrome >= 43 (using the `fetch` api)
+* Chrome >= 43 (using the `fetch` API)
 * Firefox >= 9 (using `moz-chunked-arraybuffer` responseType with xhr)
 
 The following browsers support pseudo-streaming, where the data is available before the
@@ -38,18 +38,18 @@ All browsers with full ES5 support shouldn't require any polyfills.
 
 ## How do you use it?
 
-The intent is to have the same api as the client part of the
-[node HTTP module](https://nodejs.org/api/http.html). The interfaces are the same wherever
-practical, although limitations in browsers make an exact clone of the node api impossible.
+The intent is to have the same API as the client part of the
+[Node HTTP module](https://nodejs.org/api/http.html). The interfaces are the same wherever
+practical, although limitations in browsers make an exact clone of the Node API impossible.
 
 This module implements `http.request`, `http.get`, and most of `http.ClientRequest`
 and `http.IncomingMessage` in addition to `http.METHODS` and `http.STATUS_CODES`. See the
-node docs for how these work.
+Node docs for how these work.
 
-### Extra features compared to node
+### Extra features compared to Node
 
-* The `message.url` property provides access to the final url after all redirects. This
-is useful since the browser follows all redirects silently, unlike node. It is available
+* The `message.url` property provides access to the final URL after all redirects. This
+is useful since the browser follows all redirects silently, unlike Node. It is available
 in Chrome 37 and newer, Firefox 32 and newer, and Safari 9 and newer.
 
 * The `options.withCredentials` boolean flag, used to indicate if the browser should send
@@ -57,22 +57,22 @@ cookies or authentication information with a CORS request. Default false.
 
 This module has to make some tradeoffs to support binary data and/or streaming. Generally,
 the module can make a fairly good decision about which underlying browser features to use,
-but sometimes it helps to get a little input from the user.
+but sometimes it helps to get a little input from the developer.
 
 * The `options.mode` field passed into `http.request` or `http.get` can take on one of the
 following values:
-  * 'default' (or any falsy value, including undefined): Try to provide partial data before
+  * 'default' (or any falsy value, including `undefined`): Try to provide partial data before
 the request completes, but not at the cost of correctness for binary data or correctness of
 the 'content-type' response header. This mode will also avoid slower code paths whenever
 possible, which is particularly useful when making large requests in a browser like Safari
-that has a weaker javascript engine.
+that has a weaker JavaScript engine.
   * 'allow-wrong-content-type': Provides partial data in more cases than 'default', but
 at the expense of causing the 'content-type' response header to be incorrectly reported
 (as 'text/plain; charset=x-user-defined') in some browsers, notably Safari and Chrome 42
 and older. Preserves binary data whenever possible. In some cases the implementation may
 also be a bit slow. This was the default in versions of this module before 1.5.
   * 'prefer-stream': Provide data before the request completes even if binary data (anything
-that isn't a single-byte ASCII or utf8 character) will be corrupted. Of course, this option
+that isn't a single-byte ASCII or UTF8 character) will be corrupted. Of course, this option
 is only safe for text data. May also cause the 'content-type' response header to be
 incorrectly reported (as 'text/plain; charset=x-user-defined').
   * 'disable-fetch': Force the use of plain XHR regardless of the browser declaring a fetch
@@ -80,7 +80,7 @@ capability. Preserves the correctness of binary data and the 'content-type' resp
   * 'prefer-fast': Deprecated; now a synonym for 'default', which has the same performance
 characteristics as this mode did in versions before 1.5.
 
-### Features missing compared to node
+### Features missing compared to Node
 
 * `http.Agent` is only a stub
 * The 'socket', 'connect', 'upgrade', and 'continue' events on `http.ClientRequest`.
@@ -114,7 +114,7 @@ http.get('/bundle.js', function (res) {
 
 ## Running tests
 
-There are two sets of tests: the tests that run in node (found in `test/node`) and the tests
+There are two sets of tests: the tests that run in Node (found in `test/node`) and the tests
 that run in the browser (found in `test/browser`). Normally the browser tests run on
 [Sauce Labs](http://saucelabs.com/).
 
@@ -122,7 +122,7 @@ Running `npm test` will run both sets of tests, but in order for the Sauce Labs 
 you will need to sign up for an account (free for open source projects) and put the
 credentials in a [`.zuulrc` file](https://github.com/defunctzombie/zuul/wiki/zuulrc).
 
-To run just the node tests, run `npm run test-node`.
+To run just the Node tests, run `npm run test-node`.
 
 To run the browser tests locally, run `npm run test-browser-local` and point your browser to
 `http://localhost:8080/__zuul`

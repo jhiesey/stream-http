@@ -71,6 +71,24 @@ app.post('/echo', function (req, res) {
 	req.pipe(res)
 })
 
+app.use('/verifyEmpty', function (req, res) {
+	var empty = true
+	req.on('data', function (buf) {
+		if (buf.length > 0) {
+			empty = false
+		}
+	})
+	req.on('end', function () {
+		res.setHeader('Content-Type', 'text/plain')
+
+		if (empty) {
+			res.end('empty')
+		} else {
+			res.end('not empty')
+		}
+	})
+})
+
 app.use(function (req, res, next) {
 	var parsed = url.parse(req.url, true)
 

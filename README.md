@@ -80,6 +80,11 @@ capability. Preserves the correctness of binary data and the 'content-type' resp
   * 'prefer-fast': Deprecated; now a synonym for 'default', which has the same performance
 characteristics as this mode did in versions before 1.5.
 
+* `options.timeout` allows setting a timeout for XHR and fetch (if supported by the browser).
+This is a limit on how long the entire process takes from beginning to end. Note that this
+is not the same as the node `setTimeout` functions, which apply to pauses in data transfer
+over the underlying socket.
+
 ### Features missing compared to Node
 
 * `http.Agent` is only a stub
@@ -94,8 +99,8 @@ the server.
 * `message.trailers` and `message.rawTrailers` will remain empty.
 * Redirects are followed silently by the browser, so it isn't possible to access the 301/302
 redirect pages.
-* The `timeout` options in the `request` method is non-operational in Safari <= 5 and
-Opera <= 12.
+* The `timeout` event and `setTimeout` functions, which operate on the underlying socket,
+are not available. However, see `options.timeout` above.
 
 ## Example
 

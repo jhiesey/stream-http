@@ -84,10 +84,11 @@ capability. Preserves the correctness of binary data and the 'content-type' resp
   * 'prefer-fast': Deprecated; now a synonym for 'default', which has the same performance
 characteristics as this mode did in versions before 1.5.
 
-* `options.timeout` allows setting a timeout in millisecionds for XHR and fetch (if
+* `options.requestTimeout` allows setting a timeout in millisecionds for XHR and fetch (if
 supported by the browser). This is a limit on how long the entire process takes from
 beginning to end. Note that this is not the same as the node `setTimeout` functions,
-which apply to pauses in data transfer over the underlying socket.
+which apply to pauses in data transfer over the underlying socket, or the node `timeout`
+option, which applies to opening the connection.
 
 ### Features missing compared to Node
 
@@ -103,8 +104,8 @@ the server.
 * `message.trailers` and `message.rawTrailers` will remain empty.
 * Redirects are followed silently by the browser, so it isn't possible to access the 301/302
 redirect pages.
-* The `timeout` event and `setTimeout` functions, which operate on the underlying socket,
-are not available. However, see `options.timeout` above.
+* The `timeout` event/option and `setTimeout` functions, which operate on the underlying
+socket, are not available. However, see `options.requestTimeout` above.
 
 ## Example
 

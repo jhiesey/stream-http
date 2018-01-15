@@ -13,6 +13,10 @@ This is heavily inspired by, and intended to replace, [http-browserify](https://
 In accordance with its name, `stream-http` tries to provide data to its caller before
 the request has completed whenever possible.
 
+Backpressure, allowing the browser to only pull data from the server as fast as it is
+consumed, is supported in:
+* Chrome >= 58 (using `fetch` and `WritableStream`)
+
 The following browsers support true streaming, where only a small amount of the request
 has to be held in memory at once:
 * Chrome >= 43 (using the `fetch` API)
@@ -80,10 +84,10 @@ capability. Preserves the correctness of binary data and the 'content-type' resp
   * 'prefer-fast': Deprecated; now a synonym for 'default', which has the same performance
 characteristics as this mode did in versions before 1.5.
 
-* `options.timeout` allows setting a timeout for XHR and fetch (if supported by the browser).
-This is a limit on how long the entire process takes from beginning to end. Note that this
-is not the same as the node `setTimeout` functions, which apply to pauses in data transfer
-over the underlying socket.
+* `options.timeout` allows setting a timeout in millisecionds for XHR and fetch (if
+supported by the browser). This is a limit on how long the entire process takes from
+beginning to end. Note that this is not the same as the node `setTimeout` functions,
+which apply to pauses in data transfer over the underlying socket.
 
 ### Features missing compared to Node
 

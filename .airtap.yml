@@ -14,7 +14,7 @@ browsers:
   - name: iphone
     version: '8.1..latest'
   - name: android
-    version: '4.4..latest'
+    version: '4.4..6.0' # TODO: change this back to latest once https://github.com/airtap/browsers/issues/3 is fixed
 server: ./test/server/index.js
 scripts:
   - "/ie8-polyfill.js"

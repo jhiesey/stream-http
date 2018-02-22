@@ -15,7 +15,7 @@ var skip = ((browserName === 'IE' && browserVersion <= 10) ||
 
 var reference = fs.readFileSync(__dirname + '/../server/static/browserify.png')
 
-test('binary download in WebWorker', {
+test.skip('binary download in WebWorker', {
 	skip: skip
 }, function (t) {
 	// We have to use a global url, since webworkify puts the worker in a Blob,

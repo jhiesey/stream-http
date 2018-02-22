@@ -10,7 +10,7 @@
   "scripts": {
     "test": "npm run test-node && ([ -n \"${TRAVIS_PULL_REQUEST}\" -a \"${TRAVIS_PULL_REQUEST}\" != 'false' ] || npm run test-browser)",
     "test-node": "tape test/node/*.js",
-    "test-browser": "airtap -- test/browser/*.js",
+    "test-browser": "airtap --loopback airtap.local -- test/browser/*.js",
     "test-browser-local": "airtap --local 8080 -- test/browser/*.js"
   },
   "author": "John Hiesey",

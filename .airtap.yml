@@ -18,3 +18,6 @@ server: ./test/server/index.js
 scripts:
   - "/ie8-polyfill.js"
   - "/test-polyfill.js"
+browserify:
+  - options:
+      dedupe: false

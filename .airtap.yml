@@ -5,7 +5,7 @@ browsers:
   - name: firefox
     version: 34..latest
   - name: safari
-    version: 7..latest
+    version: 8..latest
   - name: microsoftedge
     version: 13..latest
   - name: ie

@@ -8,12 +8,12 @@ browsers:
   #   version: 8..latest
   - name: MicrosoftEdge
     version: 13..latest
-  # - name: ie
-  #   version: 9..latest
-  # - name: iphone
-  #   version: '9.3..latest'
-  # - name: android
-  #   version: '4.4..6.0' # TODO: change this back to latest once https://github.com/airtap/browsers/issues/3 is fixed
+  - name: ie
+    version: 9..latest
+  - name: iphone
+    version: '9.3..latest'
+  - name: android
+    version: '4.4..6.0' # TODO: change this back to latest once https://github.com/airtap/browsers/issues/3 is fixed
 server: ./test/server/index.js
 scripts:
   - "/ie8-polyfill.js"

@@ -34,7 +34,7 @@
     "xtend": "^4.0.0"
   },
   "devDependencies": {
-    "airtap": "^0.0.5",
+    "airtap": "^0.1.0",
     "basic-auth": "^2.0.0",
     "brfs": "^1.6.1",
     "cookie-parser": "^1.4.3",

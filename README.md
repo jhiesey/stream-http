@@ -22,16 +22,9 @@ has to be held in memory at once:
 * Chrome >= 43 (using the `fetch` API)
 * Firefox >= 9 (using `moz-chunked-arraybuffer` responseType with xhr)
 
-The following browsers support pseudo-streaming, where the data is available before the
-request finishes, but the entire response must be held in memory:
-* Chrome
-* Safari >= 5, and maybe older
-* IE >= 10
-* Most other Webkit-based browsers, including the default Android browser
-
-All browsers newer than IE8 support binary responses. All of the above browsers that
-support true streaming or pseudo-streaming support that for binary data as well
-except for IE10. Old (presto-based) Opera also does not support binary streaming either.
+All other supported browsers support pseudo-streaming, where the data is available before
+the request finishes, but the entire response must be held in memory. This works for both
+text and binary data.
 
 ### IE note:
 As of version 3.0.0, IE10 and below are no longer supported. IE11 support will remain for
@@ -129,12 +122,14 @@ that run in the browser (found in `test/browser`). Normally the browser tests ru
 
 Running `npm test` will run both sets of tests, but in order for the Sauce Labs tests to run
 you will need to sign up for an account (free for open source projects) and put the
-credentials in a [`.zuulrc` file](https://github.com/defunctzombie/zuul/wiki/zuulrc).
+credentials in a [`.airtaprc` file](https://github.com/airtap/airtap/blob/master/doc/airtaprc.md).
+You will also need to run a [Sauce Connect Proxy](https://wiki.saucelabs.com/display/DOCS/Sauce+Connect+Proxy)
+with the same credentials.
 
 To run just the Node tests, run `npm run test-node`.
 
 To run the browser tests locally, run `npm run test-browser-local` and point your browser to
-`http://localhost:8080/__zuul`
+the link shown in your terminal.
 
 ## License
 

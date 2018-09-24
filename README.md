@@ -34,7 +34,8 @@ support true streaming or pseudo-streaming support that for binary data as well
 except for IE10. Old (presto-based) Opera also does not support binary streaming either.
 
 ### IE note:
-As of version 3.0.0, IE10 and below are no longer supported.
+As of version 3.0.0, IE10 and below are no longer supported. IE11 support will remain for
+now.
 
 ## How do you use it?
 

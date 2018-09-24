@@ -8,8 +8,8 @@ browsers:
     version: 8..latest
   - name: MicrosoftEdge
     version: 13..latest
-  - name: ie
-    version: 11
+  # - name: ie
+  #   version: 11 # TODO: re-enable once https://github.com/nodejs/readable-stream/issues/364 is fixed
   - name: iphone
     version: '9.3..latest'
   - name: android

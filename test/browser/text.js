@@ -14,8 +14,6 @@ var skipResponseUrl = ((browserName === 'IE') ||
 	(browserName === 'Edge') ||
 	(browserName === 'Chrome' && browserVersion <= 36) ||
 	(browserName === 'Firefox' && browserVersion <= 31) ||
-	((browserName === 'Safari' || browserName === 'Mobile Safari') && browserVersion <= 8) ||
-	(browserName === 'WebKit') || // Old mobile safari
 	(browserName === 'Android Browser' && browserVersion <= 4))
 
 var reference = fs.readFileSync(__dirname + '/../server/static/basic.txt')

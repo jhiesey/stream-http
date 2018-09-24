@@ -33,12 +33,8 @@ All browsers newer than IE8 support binary responses. All of the above browsers 
 support true streaming or pseudo-streaming support that for binary data as well
 except for IE10. Old (presto-based) Opera also does not support binary streaming either.
 
-### IE8 note:
-As of version 2.0.0, IE8 support requires the user to supply polyfills for
-`Object.keys`, `Array.prototype.forEach`, and `Array.prototype.indexOf`. Example
-implementations are provided in [ie8-polyfill.js](ie8-polyfill.js); alternately,
-you may want to consider using [es5-shim](https://github.com/es-shims/es5-shim).
-All browsers with full ES5 support shouldn't require any polyfills.
+### IE note:
+As of version 3.0.0, IE10 and below are no longer supported.
 
 ## How do you use it?
 

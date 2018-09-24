@@ -4,20 +4,10 @@ var UAParser = require('ua-parser-js')
 var url = require('url')
 var work = require('webworkify')
 
-var browser = (new UAParser()).setUA(navigator.userAgent).getBrowser()
-var browserName = browser.name
-var browserVersion = browser.major
-// Skip browsers with poor or nonexistant WebWorker support
-var skip = ((browserName === 'IE' && browserVersion <= 10) ||
-	(browserName === 'Safari' && browserVersion <= 5) ||
-	(browserName === 'WebKit' && browserVersion <= 534) || // Old mobile safari
-	(browserName === 'Android Browser' && browserVersion <= 4))
-
 var reference = fs.readFileSync(__dirname + '/../server/static/browserify.png')
 
-test('binary download in WebWorker', {
-	skip: skip
-}, function (t) {
+// Temporarily disabled due to https://github.com/browserify/webworkify/issues/41
+test.skip('binary download in WebWorker', function (t) {
 	// We have to use a global url, since webworkify puts the worker in a Blob,
 	// which doesn't have a proper location
 	var testUrl = url.resolve(global.location.href, '/browserify.png')

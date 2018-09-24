@@ -28,10 +28,7 @@ test('text streaming', function (t) {
 		var buffers = []
 
 		res.on('end', function () {
-			if (skipStreamingCheck)
-				t.skip('streaming not available on IE <= 8')
-			else
-				t.ok(buffers.length >= MIN_PIECES, 'received in multiple parts')
+			t.ok(buffers.length >= MIN_PIECES, 'received in multiple parts')
 			t.ok(reference.equals(Buffer.concat(buffers)), 'contents match')
 			t.end()
 		})

@@ -29,7 +29,7 @@
   "dependencies": {
     "builtin-status-codes": "^3.0.0",
     "inherits": "^2.0.1",
-    "readable-stream": "^3.0.5",
+    "readable-stream": "^3.0.6",
     "xtend": "^4.0.0"
   },
   "devDependencies": {

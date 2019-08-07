@@ -11,7 +11,7 @@ browsers:
   - name: ie
     version: 11
   - name: iphone
-    version: '9.3..latest'
+    version: '10.3..latest'
   - name: android
     version: '6.0..6.0' # TODO: change this back to latest once https://github.com/airtap/browsers/issues/3 is fixed
 server: ./test/server/index.js

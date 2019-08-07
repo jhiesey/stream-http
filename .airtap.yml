@@ -1,13 +1,13 @@
 sauce_connect: true
 browsers:
   - name: chrome
-    version: 39..latest
+    version: -5..latest
   - name: firefox
-    version: 34..latest
+    version: -5..latest
   - name: safari
     version: 8..latest
   - name: MicrosoftEdge
-    version: 13..latest
+    version: -5..latest
   - name: ie
     version: 11
   - name: iphone

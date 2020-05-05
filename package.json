@@ -28,18 +28,18 @@
   ],
   "dependencies": {
     "builtin-status-codes": "^3.0.0",
-    "inherits": "^2.0.1",
-    "readable-stream": "^3.0.6",
-    "xtend": "^4.0.0"
+    "inherits": "^2.0.4",
+    "readable-stream": "^3.6.0",
+    "xtend": "^4.0.2"
   },
   "devDependencies": {
     "airtap": "^3.0.0",
     "basic-auth": "^2.0.1",
-    "brfs": "^2.0.1",
-    "cookie-parser": "^1.4.3",
-    "express": "^4.16.3",
+    "brfs": "^2.0.2",
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
     "tape": "^5.0.0",
-    "ua-parser-js": "^0.7.18",
+    "ua-parser-js": "^0.7.21",
     "webworkify": "^1.5.0"
   }
 }

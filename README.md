@@ -65,7 +65,7 @@ at the expense of causing the 'content-type' response header to be incorrectly r
 (as 'text/plain; charset=x-user-defined') in some browsers, notably Safari and Chrome 42
 and older. Preserves binary data whenever possible. In some cases the implementation may
 also be a bit slow. This was the default in versions of this module before 1.5.
-  * 'prefer-stream': Provide data before the request completes even if binary data (anything
+  * 'prefer-streaming': Provide data before the request completes even if binary data (anything
 that isn't a single-byte ASCII or UTF8 character) will be corrupted. Of course, this option
 is only safe for text data. May also cause the 'content-type' response header to be
 incorrectly reported (as 'text/plain; charset=x-user-defined').

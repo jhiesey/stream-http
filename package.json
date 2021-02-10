@@ -29,6 +29,7 @@
   "dependencies": {
     "builtin-status-codes": "^3.0.0",
     "inherits": "^2.0.4",
+    "queue-microtask": "^1.2.2",
     "readable-stream": "^3.6.0",
     "xtend": "^4.0.2"
   },

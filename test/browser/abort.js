@@ -1,6 +1,9 @@
 var Buffer = require('buffer').Buffer
 var fs = require('fs')
 var test = require('tape')
+var queueMicrotask = typeof Promise !== 'undefined'
+	? require('queue-microtask')
+	: process.nextTick
 
 var http = require('../..')
 
@@ -43,7 +46,7 @@ test('abort on data', function (t) {
 				firstData = false
 				req.abort()
 				t.end()
-				process.nextTick(function () {
+				queueMicrotask(function () {
 					// Wait for any data that may have been queued
 					// in the stream before considering data events
 					// as errors

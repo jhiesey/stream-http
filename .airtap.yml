@@ -1,4 +1,5 @@
-sauce_connect: true
+providers:
+  - airtap-sauce
 browsers:
   - name: chrome
     version: -2..latest
@@ -20,3 +21,8 @@ scripts:
 browserify:
   - options:
       dedupe: false
+presets:
+  local:
+    providers: airtap-manual
+    browsers:
+      - name: manual

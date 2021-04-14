@@ -84,7 +84,7 @@ option, which applies to opening the connection.
 
 * `http.Agent` is only a stub
 * The 'socket', 'connect', 'upgrade', and 'continue' events on `http.ClientRequest`.
-* Any operations, including `request.setTimeout`, that operate directly on the underlying
+* Any operations, other than `request.setTimeout`, that operate directly on the underlying
 socket.
 * Any options that are disallowed for security reasons. This includes setting or getting
 certain headers.
@@ -94,8 +94,6 @@ the server.
 * `message.trailers` and `message.rawTrailers` will remain empty.
 * Redirects are followed silently by the browser, so it isn't possible to access the 301/302
 redirect pages.
-* The `timeout` event/option and `setTimeout` functions, which operate on the underlying
-socket, are not available. However, see `options.requestTimeout` above.
 
 ## Example
 

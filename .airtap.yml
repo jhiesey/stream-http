@@ -6,7 +6,7 @@ browsers:
   - name: firefox
     version: -2..latest
   - name: safari
-    version: 8..latest
+    version: [8..10, 12..latest] # Safari 11 fails due to https://github.com/airtap/airtap/issues/310
   - name: MicrosoftEdge
     version: -2..latest
   - name: ie

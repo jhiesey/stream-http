@@ -1,6 +1,6 @@
 # stream-http [![Build Status](https://travis-ci.org/jhiesey/stream-http.svg?branch=master)](https://travis-ci.org/jhiesey/stream-http)
 
-[![Sauce Test Status](https://saucelabs.com/browser-matrix/stream-http.svg)](https://saucelabs.com/u/stream-http)
+[![Sauce Test Status](https://app.saucelabs.com/browser-matrix/stream-http.svg)](https://app.saucelabs.com/u/stream-http)
 
 This module is an implementation of Node's native `http` module for the browser.
 It tries to match Node's API and behavior as closely as possible, but some features

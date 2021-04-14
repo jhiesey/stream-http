@@ -46,7 +46,7 @@ test('setTimeout', function (t) {
 	t.plan(2)
 
 	var req = http.get({
-		path: '/browserify.png?copies=5',
+		path: '/browserify.png?copies=5'
 	}, function (res) {
 		res.on('data', function (data) {
 		})

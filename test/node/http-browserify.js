@@ -121,9 +121,50 @@ test('Test withCredentials param', function(t) {
 	t.end()
 })
 
-test('Test ipv6 address', function(t) {
+test('Test ipv6 address as string', function(t) {
 	var testUrl = 'http://[::1]:80/foo'
 	var request = http.get(testUrl, noop)
+
+	var resolved = url.resolve(location, request._opts.url)
+	t.equal(resolved, 'http://[::1]:80/foo', 'Url should be correct')
+	t.end()
+})
+
+test('Test ipv6 address as opts with hostname [brackets] and port', function(t) {
+	var opts = {
+		protocol: "http:",
+		hostname: "[::1]",
+		port: "80",
+		path: "/foo"
+	}
+	var request = http.get(opts, noop)
+
+	var resolved = url.resolve(location, request._opts.url)
+	t.equal(resolved, 'http://[::1]:80/foo', 'Url should be correct')
+	t.end()
+})
+
+test('Test ipv6 address as opts with hostname [no brackets] and port', function(t) {
+	var opts = {
+		protocol: "http:",
+		hostname: "::1",
+		port: "80",
+		path: "/foo"
+	}
+	var request = http.get(opts, noop)
+
+	var resolved = url.resolve(location, request._opts.url)
+	t.equal(resolved, 'http://[::1]:80/foo', 'Url should be correct')
+	t.end()
+})
+
+test('Test ipv6 address as opts with host', function(t) {
+	var opts = {
+		protocol: "http:",
+		host: "[::1]:80",
+		path: "/foo"
+	}
+	var request = http.get(opts, noop)
 
 	var resolved = url.resolve(location, request._opts.url)
 	t.equal(resolved, 'http://[::1]:80/foo', 'Url should be correct')

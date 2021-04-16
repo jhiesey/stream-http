@@ -23,8 +23,9 @@ http.request = function (opts, cb) {
 	var path = opts.path || '/'
 
 	// Necessary for IPv6 addresses
-	if (host && host.indexOf(':') !== -1)
-		host = '[' + host + ']'
+	if (host && host === opts.hostname && host.indexOf(':') !== -1 && host.indexOf('[') !== 0) {
+	  host = '[' + host + ']'
+	}
 
 	// This may be a relative url. The browser should always be able to interpret it correctly.
 	opts.url = (host ? (protocol + '//' + host) : '') + (port ? ':' + port : '') + path
